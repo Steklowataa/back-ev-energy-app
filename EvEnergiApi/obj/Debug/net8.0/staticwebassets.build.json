@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "F+ngfN6dppc+yb/YWxe15FZOI1W5C4Ezrpf23bIdt6Y=",
+  "Source": "EvEnergiApi",
+  "BasePath": "_content/EvEnergiApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
