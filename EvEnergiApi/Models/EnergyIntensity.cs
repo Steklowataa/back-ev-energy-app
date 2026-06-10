@@ -1,6 +1,6 @@
 namespace EvEnergyApi.Models;
 
-public record IntensityData(
+public record IntensitySlot(
     string From,
     string To,
     Intensity Intensity
@@ -12,32 +12,28 @@ public record Intensity(
     string Index
 );
 
-//kolejne 48h
-public record Forecast(
-    string From,
-    string To,
-    Intensity Intensity
-);
-
-//miks
-
+// miks energetyczny
 public record GenerationMixItem(string Fuel, double Perc);
 
-public record GenerationMix(
+public record GenerationSlot(
     string From,
     string To,
     GenerationMixItem[] Generationmix
 );
 
+// odpowiedzi z API
+public record IntensityResponse(IntensitySlot[] Data);
+public record GenerationResponse(GenerationSlot[] Data);
+
+// odpowiedzi na frontend
 public record DailyGenerationSummary(
     string Date,
     GenerationMixItem[] AverageMix,
     double CleanEnergyPercent
 );
 
-
-public record GenerationResponse(GenerationMix[] Data);
-
-public record ForecastResponse(Forecast[] Data);
-
-public record CurrentIntensityResponse(IntensityData[] Data);
+public record ChargingWindow(
+    string From,
+    string To,
+    double CleanEnergyPercent
+);
