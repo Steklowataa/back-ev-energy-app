@@ -21,24 +21,18 @@ public class EnergyController: ControllerBase
         return Ok(data);
     }
 
-    [HttpGet("forecast")]
-    public async Task<IActionResult> GetForecast()
-    {
-        var data = await _service.GetForecastAsync();
-        return Ok(data);
-    }
-
-    [HttpGet("generation")]
-    public async Task<IActionResult> GetGeneration()
-    {
-        var data = await _service.GetGenerationAsync();
-        return Ok(data);
-    }
 
     [HttpGet("generation/three-days")]
     public async Task<IActionResult> GetThreeDay()
     {
         var data = await _service.GetThreeDayGenerationAsync();
+        return Ok(data);
+    }
+
+    [HttpGet("charging-window/{hours}")]
+    public async Task<IActionResult> GetBestChargingWindow(int hours)
+    {
+        var data = await _service.GetBestChargingWindowAsync(hours);
         return Ok(data);
     }
 }

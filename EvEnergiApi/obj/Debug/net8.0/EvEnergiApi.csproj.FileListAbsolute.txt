@@ -31,3 +31,4 @@
 /Users/aleksandra/MyApps/ev-energy-app/backend/EvEnergiApi/obj/Debug/net8.0/EvEnergiApi.pdb
 /Users/aleksandra/MyApps/ev-energy-app/backend/EvEnergiApi/obj/Debug/net8.0/EvEnergiApi.genruntimeconfig.cache
 /Users/aleksandra/MyApps/ev-energy-app/backend/EvEnergiApi/obj/Debug/net8.0/ref/EvEnergiApi.dll
+/Users/aleksandra/MyApps/ev-energy-app/backend/EvEnergiApi/obj/Debug/net8.0/EvEnergiApi.sourcelink.json
