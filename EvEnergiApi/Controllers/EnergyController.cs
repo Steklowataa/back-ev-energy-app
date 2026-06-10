@@ -35,4 +35,11 @@ public class EnergyController: ControllerBase
         var data = await _service.GetBestChargingWindowAsync(hours);
         return Ok(data);
     }
+
+    [HttpGet("charging-window/top/{hours}")]
+    public async Task<IActionResult> BestesChargingWindow(int hours)
+    {
+        var data = await _service.BestesChargingWindowAsync(hours);
+        return Ok(data);
+    }
 }
