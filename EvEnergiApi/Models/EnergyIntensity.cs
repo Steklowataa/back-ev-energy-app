@@ -37,3 +37,12 @@ public record ChargingWindow(
     string To,
     double CleanEnergyPercent
 );
+
+//drugie i trzecie miejsce
+
+public record ChargingWindowNotTop(
+    string From,
+    string To,
+    double CleanEnergyPercent,
+    int Rank
+);

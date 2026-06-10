@@ -104,4 +104,60 @@ public class CarbonIntensityService
             Math.Round(bestAverage, 1)
         );
     }
+
+    //drugie i trzecie miejsce
+
+    public async Task<ChargingWindowNotTop[]> BestesChargingWindowAsync(int hours)
+{
+    var from = DateTime.UtcNow.Date.AddDays(1).ToString("yyyy-MM-ddT00:00Z");
+    var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
+
+    var result = await GetAsync<GenerationResponse>($"{BaseUrl}/generation/{from}/{to}");
+
+    if(result?.Data == null || result.Data.Length == 0)
+    {   
+        Console.WriteLine("no data");
+        throw new Exception("no data");
+    }
+
+
+    var slots = result.Data;
+
+    Console.WriteLine("slots: ", slots.Length);
+
+    var windowSize = hours * 2;
+
+    Console.WriteLine($"Requested hours: {hours}");
+    Console.WriteLine($"Window size (30min slots): {windowSize}");
+
+    if(slots == null || slots.Length == 0)
+    {
+        throw new Exception("no data");
+    }
+    
+    var cleanPerSlot = slots
+        .Select(slot => slot.Generationmix
+            .Where(m => _cleanFuels.Contains(m.Fuel))
+            .Sum(m => m.Perc))
+        .ToArray();
+
+    var allWindows = new List<(int Index, double Average)>();
+
+    for (int i = 0; i <= slots.Length - windowSize; i++)
+    {
+        var average = cleanPerSlot.Skip(i).Take(windowSize).Average();
+        allWindows.Add((i, average));
+    }
+
+    return allWindows
+        .OrderByDescending(w => w.Average)
+        .Take(3)
+        .Select((w, rank) => new ChargingWindowNotTop(
+            slots[w.Index].From,
+            slots[w.Index + windowSize - 1].To,
+            Math.Round(w.Average, 1),
+            rank + 1
+        ))
+        .ToArray();
+}
 }
