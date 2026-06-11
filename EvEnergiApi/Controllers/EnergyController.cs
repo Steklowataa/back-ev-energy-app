@@ -42,4 +42,12 @@ public class EnergyController: ControllerBase
         var data = await _service.BestesChargingWindowAsync(hours);
         return Ok(data);
     }
+
+    [HttpGet("intensity/three-days")]
+    public async Task<IActionResult> GetThreeDayIntensity()
+    {
+        var data = await _service.GetThreeDayIntensityAsync();
+        return Ok(data);
+    }
+
 }

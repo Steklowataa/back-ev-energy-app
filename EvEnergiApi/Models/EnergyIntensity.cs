@@ -38,6 +38,7 @@ public record ChargingWindow(
     double CleanEnergyPercent
 );
 
+//dodatkowe dane nie dotyczące zadania
 //drugie i trzecie miejsce
 
 public record ChargingWindowNotTop(
@@ -45,4 +46,11 @@ public record ChargingWindowNotTop(
     string To,
     double CleanEnergyPercent,
     int Rank
+);
+
+// jutro i pojutrze forecasr + index
+public record DailyIntensitySummary(
+    string Date,
+    double AverageForecast,
+    string Index
 );

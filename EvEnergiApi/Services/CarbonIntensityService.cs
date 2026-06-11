@@ -18,6 +18,7 @@ public class CarbonIntensityService
         _httpClient = httpClient;
     }
 
+    //funkcja pmocnicza
     private async Task<T> GetAsync<T>(string url)
     {
         var response = await _httpClient.GetAsync(url);
@@ -32,6 +33,7 @@ public class CarbonIntensityService
         var result = await GetAsync<IntensityResponse>($"{BaseUrl}/intensity");
         return result;
     }
+   
 
     //zadanie 1, trzy dni, czysta energia + srednie
     public async Task<DailyGenerationSummary[]> GetThreeDayGenerationAsync()
@@ -105,6 +107,8 @@ public class CarbonIntensityService
         );
     }
 
+
+    //dodatkowe metody nie dotyczące zadania
     //drugie i trzecie miejsce
 
     public async Task<ChargingWindowNotTop[]> BestesChargingWindowAsync(int hours)
@@ -157,7 +161,36 @@ public class CarbonIntensityService
             slots[w.Index + windowSize - 1].To,
             Math.Round(w.Average, 1),
             rank + 1
-        ))
-        .ToArray();
-}
+        )).ToArray();
+    }
+
+     public async Task<DailyIntensitySummary[]> GetThreeDayIntensityAsync()
+    {
+        var from = DateTime.UtcNow.Date.ToString("yyyy-MM-ddT00:00Z");
+        var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
+
+        var result = await GetAsync<IntensityResponse>($"{BaseUrl}/intensity/{from}/{to}");
+
+        return result.Data
+            .GroupBy(slot => DateTime.Parse(slot.From).Date)
+            .OrderBy(g => g.Key)
+            .Select(dayGroup =>
+            {
+            var slots = dayGroup.ToList();
+            var avgForecast = Math.Round(
+                slots.Where(s => s.Intensity.Forecast.HasValue)
+                     .Average(s => s.Intensity.Forecast!.Value), 1
+            );
+            var index = slots
+                .GroupBy(s => s.Intensity.Index)
+                .OrderByDescending(g => g.Count())
+                .First().Key;
+
+            return new DailyIntensitySummary(
+                dayGroup.Key.ToString("yyyy-MM-dd"),
+                avgForecast,
+                index
+            );
+        }).ToArray();
+    }
 }
