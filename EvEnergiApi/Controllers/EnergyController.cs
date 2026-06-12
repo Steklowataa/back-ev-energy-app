@@ -32,6 +32,10 @@ public class EnergyController: ControllerBase
     [HttpGet("charging-window/{hours}")]
     public async Task<IActionResult> GetBestChargingWindow(int hours)
     {
+        if(hours < 1 || hours > 6)
+        {
+            return BadRequest("podaj wartosc od 1 do 6");
+        }
         var data = await _service.GetBestChargingWindowAsync(hours);
         return Ok(data);
     }
