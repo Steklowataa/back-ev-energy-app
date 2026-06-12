@@ -5,7 +5,10 @@ builder.Services.AddHttpClient<EvEnergyApi.Services.CarbonIntensityService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "https://front-ev-energy-app.onrender.com"
+            )
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
