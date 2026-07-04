@@ -34,7 +34,7 @@ public class EnergyController: ControllerBase
     {
         if(hours < 1 || hours > 6)
         {
-            return BadRequest("podaj wartosc od 1 do 6");
+            return BadRequest(new { error = "Podaj wartość od 1 do 6." });
         }
         var data = await _service.GetBestChargingWindowAsync(hours);
         return Ok(data);
