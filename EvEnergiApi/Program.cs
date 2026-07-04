@@ -32,8 +32,8 @@ app.UseExceptionHandler(errorApp =>
         {
             var ex = error.Error;
             var message = ex is HttpRequestException
-                ? "Błąd połączenia z zewnętrznym API. Spróbuj ponownie później."
-                : "Wystąpił nieoczekiwany błąd serwera.";
+                ? "Error connecting to the external API. Please try again later."
+                : "An unexpected server error occurred.";
 
             await context.Response.WriteAsJsonAsync(new { error = message });
         }
