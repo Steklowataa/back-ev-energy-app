@@ -1,7 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddHttpClient<EvEnergyApi.Services.CarbonIntensityService>();
+builder.Services.AddHttpClient<EvEnergyApi.Services.CarbonIntensityService>(client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
 
 var allowedOrigins = builder.Configuration
     .GetSection("Cors:AllowedOrigins")
@@ -29,8 +32,8 @@ app.UseExceptionHandler(errorApp =>
         {
             var ex = error.Error;
             var message = ex is HttpRequestException
-                ? "Błąd połączenia z zewnętrznym API. Spróbuj ponownie później."
-                : "Wystąpił nieoczekiwany błąd serwera.";
+                ? "Error connecting to the external API. Please try again later."
+                : "An unexpected server error occurred.";
 
             await context.Response.WriteAsJsonAsync(new { error = message });
         }
