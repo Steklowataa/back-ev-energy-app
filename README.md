@@ -2,13 +2,6 @@
 
 ASP.NET Core Web API udostępnianie danych dotyczących miksu energetycznego i okien ładowania pojazdów elektrycznych dla Wielkiej Brytanii na podstawie: [Carbon Intensity API](https://api.carbonintensity.org.uk).
 
-## Getting started
-
-```bash
-cd EvEnergiApi
-dotnet run
-```
-
 API runs on `http://localhost:5170`.
 
 ## Endpoints
