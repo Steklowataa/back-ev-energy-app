@@ -5,3 +5,4 @@
 Dodano paczke dotnet add package TimeZoneConverter
 - Dodano testy jednostkowe dla backendu ( grupowanie dni, liczenie procentu czystej energii, wybór najlepszego okna ładowania)
 - Walidacja parametru godzin (1-6)
+- Wyniesienie konfiguracji backendu poza kod
