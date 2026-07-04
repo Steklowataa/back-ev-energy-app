@@ -2,6 +2,7 @@ namespace EvEnergyApi.Services;
 
 using EvEnergyApi.Models;
 using System.Text.Json;
+using TimeZoneConverter;
 
 public class CarbonIntensityService
 {
@@ -40,11 +41,11 @@ public class CarbonIntensityService
     {
         var from = DateTime.UtcNow.Date.ToString("yyyy-MM-ddT00:00Z");
         var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
-
+        var londonZone = TZConvert.GetTimeZoneInfo("Europe/London");
         var result = await GetAsync<GenerationResponse>($"{BaseUrl}/generation/{from}/{to}");
 
         return result.Data
-            .GroupBy(slot => DateTime.Parse(slot.From).Date)
+            .GroupBy(slot => TimeZoneInfo.ConvertTimeFromUtc(DateTimeOffset.Parse(slot.From).UtcDateTime, londonZone).Date)
             .OrderBy(g => g.Key)
             .Select(dayGroup =>
             {
@@ -168,11 +169,11 @@ public class CarbonIntensityService
     {
         var from = DateTime.UtcNow.Date.ToString("yyyy-MM-ddT00:00Z");
         var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
-
+        var londonZone = TZConvert.GetTimeZoneInfo("Europe/London");
         var result = await GetAsync<IntensityResponse>($"{BaseUrl}/intensity/{from}/{to}");
 
         return result.Data
-            .GroupBy(slot => DateTime.Parse(slot.From).Date)
+            .GroupBy(slot => TimeZoneInfo.ConvertTimeFromUtc(DateTimeOffset.Parse(slot.From).UtcDateTime, londonZone).Date)
             .OrderBy(g => g.Key)
             .Select(dayGroup =>
             {

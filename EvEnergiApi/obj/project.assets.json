@@ -107,6 +107,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "TimeZoneConverter/7.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/TimeZoneConverter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/TimeZoneConverter.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
@@ -451,12 +464,33 @@
         "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "TimeZoneConverter/7.2.0": {
+      "sha512": "4Poqu79dTmacVETqUJ53g3x4U21V/cmWPSlehdsVE4Q00akavvlRq+SRjcg/CmfO9ibOCjRl6TeUV7hkC5RC4w==",
+      "type": "package",
+      "path": "timezoneconverter/7.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net462/TimeZoneConverter.dll",
+        "lib/net462/TimeZoneConverter.xml",
+        "lib/net8.0/TimeZoneConverter.dll",
+        "lib/net8.0/TimeZoneConverter.xml",
+        "lib/net9.0/TimeZoneConverter.dll",
+        "lib/net9.0/TimeZoneConverter.xml",
+        "lib/netstandard2.0/TimeZoneConverter.dll",
+        "lib/netstandard2.0/TimeZoneConverter.xml",
+        "timezoneconverter.7.2.0.nupkg.sha512",
+        "timezoneconverter.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.AspNetCore.OpenApi >= 8.0.3",
-      "Swashbuckle.AspNetCore >= 6.4.0"
+      "Swashbuckle.AspNetCore >= 6.4.0",
+      "TimeZoneConverter >= 7.2.0"
     ]
   },
   "packageFolders": {
@@ -508,6 +542,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
+          },
+          "TimeZoneConverter": {
+            "target": "Package",
+            "version": "[7.2.0, )"
           }
         },
         "imports": [

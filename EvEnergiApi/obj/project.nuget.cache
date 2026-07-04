@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SpzrAsUeE0TkpRZyriL/inOu0BhSOLPKIQ72wwhqiR9XPisoOaaCWT+na/y/cPBcuXvt9eg/0GXyoIQzB8jxNQ==",
+  "dgSpecHash": "FnjovCX0shvVqkTPHoxzq9dgTXRNzFzrBhNPEG09cM3/rMnvqg8lDqxTDtirE7to/lElGlmN+yZlsWTSpztEhg==",
   "success": true,
   "projectFilePath": "/Users/aleksandra/MyApps/ev-energy-app/backend/EvEnergiApi/EvEnergiApi.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,8 @@
     "/Users/aleksandra/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/aleksandra/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "/Users/aleksandra/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
-    "/Users/aleksandra/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+    "/Users/aleksandra/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
+    "/Users/aleksandra/.nuget/packages/timezoneconverter/7.2.0/timezoneconverter.7.2.0.nupkg.sha512"
   ],
   "logs": []
 }
