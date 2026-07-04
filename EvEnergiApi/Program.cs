@@ -1,7 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddHttpClient<EvEnergyApi.Services.CarbonIntensityService>();
+builder.Services.AddHttpClient<EvEnergyApi.Services.CarbonIntensityService>(client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
 
 var allowedOrigins = builder.Configuration
     .GetSection("Cors:AllowedOrigins")

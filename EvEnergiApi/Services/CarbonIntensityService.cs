@@ -8,7 +8,7 @@ public class CarbonIntensityService
 {
     private readonly HttpClient _httpClient;
     private readonly string _baseUrl;
-    private readonly string[] _cleanFuels = { "biomass", "nuclear", "hydro", "wind", "solar" };
+    private readonly string[] _cleanFuels = FuelTypes.Clean;
     private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
     {
         PropertyNameCaseInsensitive = true
@@ -122,19 +122,12 @@ public class CarbonIntensityService
 
     if(result?.Data == null || result.Data.Length == 0)
     {   
-        Console.WriteLine("no data");
         throw new Exception("no data");
     }
 
 
     var slots = result.Data;
-
-    Console.WriteLine("slots: ", slots.Length);
-
     var windowSize = hours * 2;
-
-    Console.WriteLine($"Requested hours: {hours}");
-    Console.WriteLine($"Window size (30min slots): {windowSize}");
 
     if(slots == null || slots.Length == 0)
     {

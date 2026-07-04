@@ -1,5 +1,20 @@
 namespace EvEnergyApi.Models;
 
+public static class FuelTypes
+{
+    public const string Biomass = "biomass";
+    public const string Nuclear = "nuclear";
+    public const string Hydro = "hydro";
+    public const string Wind = "wind";
+    public const string Solar = "solar";
+    public const string Gas = "gas";
+    public const string Coal = "coal";
+    public const string Imports = "imports";
+    public const string Other = "other";
+
+    public static readonly string[] Clean = { Biomass, Nuclear, Hydro, Wind, Solar };
+}
+
 public record IntensitySlot(
     string From,
     string To,
