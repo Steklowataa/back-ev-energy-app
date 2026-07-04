@@ -7,14 +7,14 @@ using TimeZoneConverter;
 public class CarbonIntensityService
 {
     private readonly HttpClient _httpClient;
-    private const string BaseUrl = "https://api.carbonintensity.org.uk";
+    private readonly string _baseUrl;
     private readonly string[] _cleanFuels = { "biomass", "nuclear", "hydro", "wind", "solar" };
     private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
     {
         PropertyNameCaseInsensitive = true
     };
 
-    public CarbonIntensityService(HttpClient httpClient)
+    public CarbonIntensityService(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
         _baseUrl = configuration["CarbonIntensityApi:BaseUrl"] ?? throw new InvalidOperationException("Brak konfiguracji z baseurl");
@@ -32,7 +32,7 @@ public class CarbonIntensityService
     //jeden dzien, indx, forcast i actual
     public async Task<IntensityResponse> GetCurrentIntensityAsync()
     {
-        var result = await GetAsync<IntensityResponse>($"{BaseUrl}/intensity");
+        var result = await GetAsync<IntensityResponse>($"{_baseUrl}/intensity");
         return result;
     }
    
@@ -43,7 +43,7 @@ public class CarbonIntensityService
         var from = DateTime.UtcNow.Date.ToString("yyyy-MM-ddT00:00Z");
         var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
         var londonZone = TZConvert.GetTimeZoneInfo("Europe/London");
-        var result = await GetAsync<GenerationResponse>($"{BaseUrl}/generation/{from}/{to}");
+        var result = await GetAsync<GenerationResponse>($"{_baseUrl}/generation/{from}/{to}");
 
         return result.Data
             .GroupBy(slot => TimeZoneInfo.ConvertTimeFromUtc(DateTimeOffset.Parse(slot.From).UtcDateTime, londonZone).Date)
@@ -78,7 +78,7 @@ public class CarbonIntensityService
         var from = DateTime.UtcNow.Date.AddDays(1).ToString("yyyy-MM-ddT00:00Z");
         var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
 
-        var result = await GetAsync<GenerationResponse>($"{BaseUrl}/generation/{from}/{to}");
+        var result = await GetAsync<GenerationResponse>($"{_baseUrl}/generation/{from}/{to}");
         var slots = result.Data;
 
         var windowSize = hours * 2;
@@ -118,7 +118,7 @@ public class CarbonIntensityService
     var from = DateTime.UtcNow.Date.AddDays(1).ToString("yyyy-MM-ddT00:00Z");
     var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
 
-    var result = await GetAsync<GenerationResponse>($"{BaseUrl}/generation/{from}/{to}");
+    var result = await GetAsync<GenerationResponse>($"{_baseUrl}/generation/{from}/{to}");
 
     if(result?.Data == null || result.Data.Length == 0)
     {   
@@ -171,7 +171,7 @@ public class CarbonIntensityService
         var from = DateTime.UtcNow.Date.ToString("yyyy-MM-ddT00:00Z");
         var to = DateTime.UtcNow.Date.AddDays(2).ToString("yyyy-MM-ddT23:30Z");
         var londonZone = TZConvert.GetTimeZoneInfo("Europe/London");
-        var result = await GetAsync<IntensityResponse>($"{BaseUrl}/intensity/{from}/{to}");
+        var result = await GetAsync<IntensityResponse>($"{_baseUrl}/intensity/{from}/{to}");
 
         return result.Data
             .GroupBy(slot => TimeZoneInfo.ConvertTimeFromUtc(DateTimeOffset.Parse(slot.From).UtcDateTime, londonZone).Date)
