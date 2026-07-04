@@ -1,10 +1,6 @@
 # EV Energy API
 
-ASP.NET Core Web API providing energy mix and EV charging window data for Great Britain, based on the [Carbon Intensity API](https://api.carbonintensity.org.uk).
-
-## Requirements
-
-- .NET 8 SDK
+ASP.NET Core Web API udostępnianie danych dotyczących miksu energetycznego i okien ładowania pojazdów elektrycznych dla Wielkiej Brytanii na podstawie: [Carbon Intensity API](https://api.carbonintensity.org.uk).
 
 ## Getting started
 
@@ -17,7 +13,7 @@ API runs on `http://localhost:5170`.
 
 ## Endpoints
 
-| Method | Endpoint | Description |
+| Metoda | Endpoint | Opis |
 |---|---|---|
 | GET | `/api/energy/current` | Current CO₂ intensity |
 | GET | `/api/energy/generation/three-days` | Energy mix for today, tomorrow and day after |
@@ -25,7 +21,7 @@ API runs on `http://localhost:5170`.
 | GET | `/api/energy/charging-window/{hours}` | Best charging window (1–6h) |
 | GET | `/api/energy/charging-window/top3?hours={hours}` | Top 3 charging windows |
 
-## Configuration
+## Konfiguracja
 
 ```json
 {
@@ -38,7 +34,7 @@ API runs on `http://localhost:5170`.
 }
 ```
 
-## Running tests
+## Testy
 
 ```bash
 cd EvEnergyApi.Tests
