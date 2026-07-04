@@ -2,13 +2,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddHttpClient<EvEnergyApi.Services.CarbonIntensityService>();
+
+var allowedOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>() ?? [];
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins(
-            "http://localhost:5173",
-            "https://front-ev-energy-app.onrender.com"
-            )
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
@@ -34,7 +36,6 @@ app.UseExceptionHandler(errorApp =>
         }
     });
 });
-
 
 app.UseCors("AllowFrontend");
 app.MapControllers();

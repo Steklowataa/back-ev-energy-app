@@ -17,6 +17,7 @@ public class CarbonIntensityService
     public CarbonIntensityService(HttpClient httpClient)
     {
         _httpClient = httpClient;
+        _baseUrl = configuration["CarbonIntensityApi:BaseUrl"] ?? throw new InvalidOperationException("Brak konfiguracji z baseurl");
     }
 
     //funkcja pmocnicza
