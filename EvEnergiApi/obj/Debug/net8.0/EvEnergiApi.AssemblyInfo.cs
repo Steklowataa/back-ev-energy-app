@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EvEnergiApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a7a93e562e61355c09ae420c49ca456ecfd2d69")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f1b7e082e47ee8a50d300daf0828e74d41f722c")]
 [assembly: System.Reflection.AssemblyProductAttribute("EvEnergiApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EvEnergiApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
